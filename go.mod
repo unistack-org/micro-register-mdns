@@ -4,9 +4,8 @@ go 1.15
 
 require (
 	github.com/google/uuid v1.2.0
-	github.com/miekg/dns v1.1.31
-	github.com/unistack-org/micro/v3 v3.2.14
+	github.com/miekg/dns v1.1.42
+	github.com/unistack-org/micro/v3 v3.3.17
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
-	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
-	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e // indirect
+	golang.org/x/net v0.0.0-20210510120150-4163338589ed
 )
