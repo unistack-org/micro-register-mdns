@@ -234,7 +234,7 @@ func registerService(service *register.Service, entries []*mdnsEntry, options re
 		var seen bool
 
 		for _, entry := range entries {
-			if node.Id == entry.id {
+			if node.ID == entry.id {
 				seen = true
 				break
 			}
@@ -269,7 +269,7 @@ func registerService(service *register.Service, entries []*mdnsEntry, options re
 		}
 		// we got here, new node
 		s, err := util.NewMDNSService(
-			node.Id,
+			node.ID,
 			service.Name,
 			options.Domain+".",
 			"",
@@ -288,7 +288,7 @@ func registerService(service *register.Service, entries []*mdnsEntry, options re
 			continue
 		}
 
-		entries = append(entries, &mdnsEntry{id: node.Id, node: srv})
+		entries = append(entries, &mdnsEntry{id: node.ID, node: srv})
 	}
 
 	return entries, lastError
@@ -388,7 +388,7 @@ func (m *mdnsRegister) Deregister(ctx context.Context, service *register.Service
 		var remove bool
 
 		for _, node := range service.Nodes {
-			if node.Id == entry.id {
+			if node.ID == entry.id {
 				entry.node.Shutdown()
 				remove = true
 				break
@@ -500,7 +500,7 @@ func (m *mdnsRegister) LookupService(ctx context.Context, service string, opts .
 					continue
 				}
 				s.Nodes = append(s.Nodes, &register.Node{
-					Id:       strings.TrimSuffix(e.Name, "."+p.Service+"."+p.Domain+"."),
+					ID:       strings.TrimSuffix(e.Name, "."+p.Service+"."+p.Domain+"."),
 					Address:  fmt.Sprintf("%s:%d", addr, e.Port),
 					Metadata: txt.Metadata,
 				})
@@ -746,7 +746,7 @@ func (m *mdnsWatcher) Next() (*register.Result, error) {
 			}
 
 			service.Nodes = append(service.Nodes, &register.Node{
-				Id:       strings.TrimSuffix(e.Name, suffix),
+				ID:       strings.TrimSuffix(e.Name, suffix),
 				Address:  fmt.Sprintf("%s:%d", addr, e.Port),
 				Metadata: txt.Metadata,
 			})
