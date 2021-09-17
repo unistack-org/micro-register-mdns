@@ -3,7 +3,7 @@ module github.com/unistack-org/micro-register-mdns/v3
 go 1.16
 
 require (
-	github.com/google/uuid v1.2.0
+	github.com/google/uuid v1.3.0
 	github.com/miekg/dns v1.1.43
 	github.com/unistack-org/micro/v3 v3.7.1
 	golang.org/x/net v0.0.0-20210525063256-abc453219eb5
