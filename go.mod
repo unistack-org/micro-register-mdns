@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/google/uuid v1.3.0
 	github.com/miekg/dns v1.1.43
-	github.com/unistack-org/micro/v3 v3.7.1
-	golang.org/x/net v0.0.0-20210525063256-abc453219eb5
+	github.com/unistack-org/micro/v3 v3.7.5
+	golang.org/x/net v0.0.0-20210928044308-7d9f5e0b762b
 	golang.org/x/sys v0.0.0-20210603125802-9665404d3644 // indirect
 )
