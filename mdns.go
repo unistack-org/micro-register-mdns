@@ -1,4 +1,4 @@
-package mdns
+package mdns // import "go.unistack.org/micro-register-mdns/v3"
 
 import (
 	"bytes"
@@ -14,10 +14,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/google/uuid"
-	util "github.com/unistack-org/micro-register-mdns/v3/util"
-	"github.com/unistack-org/micro/v3/logger"
-	"github.com/unistack-org/micro/v3/register"
+	util "go.unistack.org/micro-register-mdns/v3/util"
+	"go.unistack.org/micro/v3/logger"
+	"go.unistack.org/micro/v3/register"
+	"go.unistack.org/micro/v3/util/id"
 )
 
 const (
@@ -251,7 +251,6 @@ func registerService(service *register.Service, entries []*mdnsEntry, options re
 			Endpoints: service.Endpoints,
 			Metadata:  node.Metadata,
 		})
-
 		if err != nil {
 			lastError = err
 			continue
@@ -449,9 +448,9 @@ func (m *mdnsRegister) LookupService(ctx context.Context, service string, opts .
 
 	p := util.DefaultParams(service)
 	// set context with timeout
-	//var cancel context.CancelFunc
-	//p.Context, cancel = context.WithTimeout(context.Background(), m.opts.Timeout)
-	//defer cancel()
+	// var cancel context.CancelFunc
+	// p.Context, cancel = context.WithTimeout(context.Background(), m.opts.Timeout)
+	// defer cancel()
 	// set entries channel
 	p.Entries = entries
 	// set the domain
@@ -506,7 +505,7 @@ func (m *mdnsRegister) LookupService(ctx context.Context, service string, opts .
 				})
 
 				serviceMap[txt.Version] = s
-				//case <-p.Context.Done():
+				// case <-p.Context.Done():
 				//	close(done)
 				//	return
 			}
@@ -550,9 +549,9 @@ func (m *mdnsRegister) ListServices(ctx context.Context, opts ...register.ListOp
 
 	p := util.DefaultParams("_services")
 	// set context with timeout
-	//var cancel context.CancelFunc
-	//p.Context, cancel = context.WithTimeout(context.Background(), m.opts.Timeout)
-	//defer cancel()
+	// var cancel context.CancelFunc
+	// p.Context, cancel = context.WithTimeout(context.Background(), m.opts.Timeout)
+	// defer cancel()
 	// set entries channel
 	p.Entries = entries
 	// set domain
@@ -575,9 +574,9 @@ func (m *mdnsRegister) ListServices(ctx context.Context, opts ...register.ListOp
 					serviceMap[name] = true
 					services = append(services, &register.Service{Name: name})
 				}
-				//case <-p.Context.Done():
+				// case <-p.Context.Done():
 				//	close(done)
-				//return
+				// return
 			}
 		}
 	}()
@@ -606,13 +605,17 @@ func (m *mdnsRegister) Watch(ctx context.Context, opts ...register.WatchOption) 
 	}
 
 	md := &mdnsWatcher{
-		id:       uuid.New().String(),
 		wo:       wo,
 		ch:       make(chan *util.ServiceEntry, 32),
 		exit:     make(chan struct{}),
 		domain:   wo.Domain,
 		registry: m,
 	}
+	id, err := id.New()
+	if err != nil {
+		return nil, err
+	}
+	md.id = id
 
 	m.mtx.Lock()
 	defer m.mtx.Unlock()
@@ -676,7 +679,6 @@ func (m *mdnsRegister) Watch(ctx context.Context, opts ...register.WatchOption) 
 						m.mtx.RUnlock()
 					}
 				}
-
 			}()
 
 			// start listening, blocking call

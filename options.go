@@ -4,7 +4,7 @@ package mdns
 import (
 	"context"
 
-	"github.com/unistack-org/micro/v3/register"
+	"go.unistack.org/micro/v3/register"
 )
 
 // Domain sets the mdnsDomain

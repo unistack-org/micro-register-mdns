@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/unistack-org/micro/v3/register"
+	"go.unistack.org/micro/v3/register"
 )
 
 func TestMDNS(t *testing.T) {
@@ -23,7 +23,7 @@ func TestMDNS(t *testing.T) {
 			Version: "1.0.1",
 			Nodes: []*register.Node{
 				{
-					Id:      "test1-1",
+					ID:      "test1-1",
 					Address: "10.0.0.1:10001",
 					Metadata: map[string]string{
 						"foo": "bar",
@@ -36,7 +36,7 @@ func TestMDNS(t *testing.T) {
 			Version: "1.0.2",
 			Nodes: []*register.Node{
 				{
-					Id:      "test2-1",
+					ID:      "test2-1",
 					Address: "10.0.0.2:10002",
 					Metadata: map[string]string{
 						"foo2": "bar2",
@@ -49,7 +49,7 @@ func TestMDNS(t *testing.T) {
 			Version: "1.0.3",
 			Nodes: []*register.Node{
 				{
-					Id:      "test3-1",
+					ID:      "test3-1",
 					Address: "10.0.0.3:10003",
 					Metadata: map[string]string{
 						"foo3": "bar3",
@@ -100,8 +100,8 @@ func TestMDNS(t *testing.T) {
 
 		node := s[0].Nodes[0]
 
-		if node.Id != service.Nodes[0].Id {
-			t.Fatalf("Expected node id %s got %s", service.Nodes[0].Id, node.Id)
+		if node.ID != service.Nodes[0].ID {
+			t.Fatalf("Expected node id %s got %s", service.Nodes[0].ID, node.ID)
 		}
 
 		if node.Address != service.Nodes[0].Address {
@@ -139,7 +139,6 @@ func TestMDNS(t *testing.T) {
 			t.Fatalf("Expected nothing got %+v", s[0])
 		}
 	}
-
 }
 
 func TestEncoding(t *testing.T) {
@@ -148,22 +147,6 @@ func TestEncoding(t *testing.T) {
 			Version: "1.0.0",
 			Metadata: map[string]string{
 				"foo": "bar",
-			},
-			Endpoints: []*register.Endpoint{
-				{
-					Name: "endpoint1",
-					Request: &register.Value{
-						Name: "request",
-						Type: "request",
-					},
-					Response: &register.Value{
-						Name: "response",
-						Type: "response",
-					},
-					Metadata: map[string]string{
-						"foo1": "bar1",
-					},
-				},
 			},
 		},
 	}
@@ -189,17 +172,12 @@ func TestEncoding(t *testing.T) {
 			t.Fatalf("Expected version %s got %s", d.Version, decoded.Version)
 		}
 
-		if len(decoded.Endpoints) != len(d.Endpoints) {
-			t.Fatalf("Expected %d endpoints, got %d", len(d.Endpoints), len(decoded.Endpoints))
-		}
-
 		for k, v := range d.Metadata {
 			if val := decoded.Metadata[k]; val != v {
 				t.Fatalf("Expected %s=%s got %s=%s", k, v, k, val)
 			}
 		}
 	}
-
 }
 
 func TestWatcher(t *testing.T) {
@@ -215,7 +193,7 @@ func TestWatcher(t *testing.T) {
 			Version: "1.0.1",
 			Nodes: []*register.Node{
 				{
-					Id:      "test1-1",
+					ID:      "test1-1",
 					Address: "10.0.0.1:10001",
 					Metadata: map[string]string{
 						"foo": "bar",
@@ -228,7 +206,7 @@ func TestWatcher(t *testing.T) {
 			Version: "1.0.2",
 			Nodes: []*register.Node{
 				{
-					Id:      "test2-1",
+					ID:      "test2-1",
 					Address: "10.0.0.2:10002",
 					Metadata: map[string]string{
 						"foo2": "bar2",
@@ -241,7 +219,7 @@ func TestWatcher(t *testing.T) {
 			Version: "1.0.3",
 			Nodes: []*register.Node{
 				{
-					Id:      "test3-1",
+					ID:      "test3-1",
 					Address: "10.0.0.3:10003",
 					Metadata: map[string]string{
 						"foo3": "bar3",
@@ -254,7 +232,6 @@ func TestWatcher(t *testing.T) {
 	testFn := func(service, s *register.Service) {
 		if s == nil {
 			t.Fatalf("Expected one result for %s got nil", service.Name)
-
 		}
 
 		if s.Name != service.Name {
@@ -271,8 +248,8 @@ func TestWatcher(t *testing.T) {
 
 		node := s.Nodes[0]
 
-		if node.Id != service.Nodes[0].Id {
-			t.Fatalf("Expected node id %s got %s", service.Nodes[0].Id, node.Id)
+		if node.ID != service.Nodes[0].ID {
+			t.Fatalf("Expected node id %s got %s", service.Nodes[0].ID, node.ID)
 		}
 
 		if node.Address != service.Nodes[0].Address {

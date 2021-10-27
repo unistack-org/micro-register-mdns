@@ -6,7 +6,7 @@ import (
 	"net"
 	"sync"
 
-	"github.com/unistack-org/micro/v3/logger"
+	"go.unistack.org/micro/v3/logger"
 	"golang.org/x/net/dns/dnsmessage"
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
@@ -311,7 +311,7 @@ func (c *client) query(ctx context.Context, params *QueryParam) error {
 	//	buf := make([]byte, 2, 514)
 	hdr := dnsmessage.Header{RecursionDesired: false}
 	b := dnsmessage.NewBuilder(nil, hdr)
-	//b.EnableCompression()
+	// b.EnableCompression()
 	name, err := dnsmessage.NewName(serviceAddr)
 	if err != nil {
 		return err
@@ -322,7 +322,7 @@ func (c *client) query(ctx context.Context, params *QueryParam) error {
 	} else {
 		q.Type = params.Type
 	}
-	//q.Class |= 1 << 15
+	// q.Class |= 1 << 15
 	if err = b.StartQuestions(); err != nil {
 		return err
 	}
@@ -381,7 +381,6 @@ func (c *client) query(ctx context.Context, params *QueryParam) error {
 			return nil
 		}
 	}
-
 }
 
 // sendQuery is used to multicast a query out

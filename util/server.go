@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 
 	"github.com/miekg/dns"
-	registry "github.com/unistack-org/micro/v3/register"
-	regutil "github.com/unistack-org/micro/v3/util/register"
+	registry "go.unistack.org/micro/v3/register"
+	regutil "go.unistack.org/micro/v3/util/register"
 	"golang.org/x/net/dns/dnsmessage"
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
@@ -139,8 +139,8 @@ func NewServer(config *Config) (*Server, error) {
 	go s.recv(s.ipv6conn)
 
 	go s.update()
-	//s.wg.Add(1)
-	//go s.probe()
+	// s.wg.Add(1)
+	// go s.probe()
 
 	return s, nil
 }
@@ -218,7 +218,6 @@ func (s *Server) parsePacket(buf []byte, from net.Addr) error {
 }
 
 func (s *Server) LookupService(name string, opts ...registry.LookupOption) ([]*registry.Service, error) {
-
 	return nil, nil
 }
 

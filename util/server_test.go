@@ -5,7 +5,7 @@ package mdns
 import (
 	"testing"
 
-	registry "github.com/unistack-org/micro/v3/register"
+	registry "go.unistack.org/micro/v3/register"
 )
 
 var (
