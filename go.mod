@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/miekg/dns v1.1.68
-	go.unistack.org/micro/v3 v3.11.46
+	go.unistack.org/micro/v3 v3.11.48
 	golang.org/x/net v0.46.0
 )
 
