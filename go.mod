@@ -1,6 +1,6 @@
 module go.unistack.org/micro-register-mdns/v3
 
-go 1.26.0
+go 1.27
 
 require (
 	github.com/miekg/dns v1.1.73
