@@ -5,7 +5,7 @@ go 1.27
 require (
 	github.com/miekg/dns v1.1.73
 	go.unistack.org/micro/v3 v3.11.51
-	golang.org/x/net v0.61.0
+	golang.org/x/net v0.62.0
 )
 
 require (
